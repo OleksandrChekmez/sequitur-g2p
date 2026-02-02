@@ -71,6 +71,7 @@ sequiturExtension = Extension(
         "PriorityQueue.hh",
         "Probability.hh",
         "Python.hh",
+        "ReferenceCounting.hh",
         "SequenceModel.hh",
         "Types.hh",
         "Utility.hh",
