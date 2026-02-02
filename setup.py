@@ -31,7 +31,7 @@ import numpy
 from setuptools import setup, Extension
 from setuptools.command.build_py import build_py as _build_py
 
-VERSION = "1.0.1668.27"
+VERSION = "1.0.1668.26"
 
 with open("requirements.txt") as fp:
     required = fp.read().splitlines()
@@ -80,12 +80,8 @@ sequiturExtension = Extension(
         "SequenceModel.cc",
         "Translation.cc",
     ],
-    include_dirs=[numpy.get_include()],
-    extra_compile_args=[
-        "-std=c++11",
-        "-DNPY_NO_DEPRECATED_API=NPY_1_7_API_VERSION",
-        "-pedantic",
-    ],
+    include_dirs=[os.path.join(path, "core/include") for path in numpy.__path__],
+    extra_compile_args=["-DNPY_NO_DEPRECATED_API=NPY_1_7_API_VERSION"],
 )
 
 sequiturModules = [
@@ -104,11 +100,10 @@ sequiturModules = [
 sequiturScripts = ["g2p.py"]
 
 
-# os.system("cython -3  SparseVector.pyx")
-# sparseExtension = Extension("SparseVector", language="c", sources=["SparseVector.c"])
-# os.system('pyrexc IntTuple.pyx')
-# intTupleExtension = Extension('IntTuple', ['IntTuple.c'])
-
+#  os.system('pyrexc SparseVector.pyx')
+#  sparseExtension = Extension('SparseVector', ['SparseVector.c'])
+#  os.system('pyrexc IntTuple.pyx')
+#  intTupleExtension = Extension('IntTuple', ['IntTuple.c'])
 lmModules = [
     "IterMap",
     "mGramCounts",
@@ -151,10 +146,13 @@ setup(
         "Topic :: Scientific/Engineering",
         "Programming Language :: Python",
         "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.6",
+        "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
         "Programming Language :: Python :: 3.10",
         "Programming Language :: Python :: 3.11",
         "Programming Language :: Python :: 3.12",
     ],
-    python_requires=">=3.9.0",
+    python_requires=">=2.7.0",
 )
